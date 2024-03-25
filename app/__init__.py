@@ -52,9 +52,18 @@ class App:
             if isinstance(item, type) and issubclass(item, Command) and item is not Command:
                 self.command_handler.register_command(plugin_name, item())
                 logging.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
+    
+    def load_history_file(self, file_name):
+        file_name = 'history.csv'
+        if os.path.exists(file_name):
+            pass
+        else:
+            with open(file_name, 'w', newline=''):
+                pass
 
     def start(self):
         self.load_plugins()
+        self.load_history_file('history.csv')
         logging.info("Application started. Type 'exit' to exit.")
         try:
             while True:
