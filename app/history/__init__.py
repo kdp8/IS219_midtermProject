@@ -6,12 +6,10 @@ import pandas as pd
 class History:
     history_file = 'history.csv'
 
-    # def __init__(self, history_file='history.csv'):
-    #     self.history_file = history_file
-
-    def load_history(self):
+    @classmethod
+    def load_history(cls):
         try:
-            history = pd.read_csv(self.history_file)
+            history = pd.read_csv(cls.history_file)
             print(history)
             logging.info("History loaded successfully.")
         except pd.errors.EmptyDataError:
@@ -19,11 +17,12 @@ class History:
         except Exception as e:
             logging.error(f"Error loading history: {e}")
 
-    def delete_history(self, index):
+    @classmethod
+    def delete_history(cls, index):
         try:
-            history = pd.read_csv(self.history_file)
+            history = pd.read_csv(cls.history_file)
             history.drop(index=index, inplace=True)
-            history.to_csv(self.history_file, index=False)
+            history.to_csv(cls.history_file, index=False)
             logging.info("History row deleted successfully.")
         except pd.errors.EmptyDataError:
             logging.error("No columns to parse from file.")
@@ -32,9 +31,10 @@ class History:
         except Exception as e:
             logging.error(f"Error deleting history: {e}")
 
-    def clear_history(self):
+    @classmethod
+    def clear_history(cls):
         try:
-            with open(self.history_file, 'w', newline='') as csv_file:
+            with open(cls.history_file, 'w', newline='') as csv_file:
                 header = ['command', 'param1', 'param2']
                 writer = csv.writer(csv_file)
                 writer.writerow(header)
