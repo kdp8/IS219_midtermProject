@@ -11,3 +11,9 @@ class MultiplyCommand(Command):
             print("List of available commands:", directories)
         except FileNotFoundError:
             logging.error("An unexpected error occured.")
+
+# Readme
+# Refractor logging stuff
+# Documentation (video)
+# Testing
+# Add history filename/path as an env var
