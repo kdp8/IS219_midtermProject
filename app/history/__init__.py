@@ -4,8 +4,10 @@ import os
 import pandas as pd
 
 class History:
-    def __init__(self, history_file='history.csv'):
-        self.history_file = history_file
+    history_file = 'history.csv'
+
+    # def __init__(self, history_file='history.csv'):
+    #     self.history_file = history_file
 
     def load_history(self):
         try:
@@ -39,3 +41,13 @@ class History:
             logging.info("History cleared successfully.")
         except Exception as e:
             logging.error(f"Error clearing history: {e}")
+
+    @classmethod
+    def add_history(cls, command, param1, param2):
+        try:
+            with open(cls.history_file, 'a', newline='') as csv_file:
+                writer = csv.writer(csv_file)
+                writer.writerow([command, param1, param2])
+            logging.info("History entry added successfully.")
+        except Exception as e:
+            logging.error(f"Error adding entry to history: {e}")
