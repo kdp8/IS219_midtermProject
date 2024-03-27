@@ -2,11 +2,13 @@
 Testing all the commands
 """
 from decimal import Decimal
-
+import os
+from unittest.mock import MagicMock, patch
 import pytest
 from app.plugins.exit import ExitCommand
 from app.plugins.greet import GreetCommand
 from app.plugins.add import AddCommand
+from app.plugins.menu import MenuCommand
 from app.plugins.subtract import SubtractCommand
 from app.plugins.multiply import MultiplyCommand
 from app.plugins.divide import DivideCommand
@@ -76,3 +78,21 @@ def test_exit_command():
     with pytest.raises(SystemExit) as e:
         command.execute()
     assert str(e.value) == "Exiting...", "The ExitCommand should trigger system exit with 'Exiting...' message"
+
+def test_menu_command(monkeypatch, capfd):
+    '''
+    Test menu command which lists all available commands
+    '''
+    plugins = ['exit', 'greet', 'add', 'subtract', 'multiply', 'divide']
+    monkeypatch.setattr(os, 'listdir', MagicMock(return_value=plugins))
+    monkeypatch.setattr(os.path, 'isdir', lambda path: True)
+    with patch('app.plugins.menu.print') as mock_print:
+        command = MenuCommand()
+        command.execute()
+        mock_print.assert_called_with("List of available commands:", plugins)
+
+    monkeypatch.setattr(os, 'listdir', MagicMock(side_effect=FileNotFoundError))
+    with patch('app.plugins.menu.logging.error') as mock_logging_error:
+        command = MenuCommand()
+        command.execute()
+        mock_logging_error.assert_called_with("An unexpected error occured.")
