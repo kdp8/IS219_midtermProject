@@ -15,8 +15,5 @@ class MenuCommand(Command):
         except FileNotFoundError:
             logging.error("An unexpected error occured.")
 
-# Readme
-# Refractor logging stuff
-# Documentation (video)
-# Testing
+# Readme & Documentation (video)
 # Add history filename/path as an env var

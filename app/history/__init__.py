@@ -27,7 +27,7 @@ class History:
         except pd.errors.EmptyDataError:
             logging.error("No columns to parse from file.")
         except KeyError:
-            logging.info("Index not found in history.")
+            logging.error("Index not found in history.")
         except Exception as e:
             logging.error(f"Error deleting history: {e}")
 
