@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import logging
 
 class Command(ABC):
     @abstractmethod
@@ -16,4 +17,4 @@ class CommandHandler:
         if command_name in self.commands:
             self.commands[command_name].execute()
         else:
-            print(f"No such command: {command_name}")
+            logging.error(f"No such command: {command_name}")
