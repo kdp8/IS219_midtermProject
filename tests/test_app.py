@@ -22,4 +22,4 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     with pytest.raises(SystemExit):  # Expect the SystemExit when 'exit' is processed
         app.start()  # Call the start method on the instance
     out, err = capfd.readouterr()   # pylint: disable=unused-variable
-    assert "No such command: unknown_command" in out
+    assert "No such command: unknown_command" in err
