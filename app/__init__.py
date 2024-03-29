@@ -1,3 +1,4 @@
+import csv
 import importlib
 import os
 import logging
@@ -58,8 +59,10 @@ class App:
         if os.path.exists(file_name):
             pass
         else:
-            with open(file_name, 'w', newline=''):
-                pass
+            with open(file_name, 'w', newline='') as csv_file:
+                header = ['command', 'param1', 'param2']
+                writer = csv.writer(csv_file)
+                writer.writerow(header)
 
     def start(self):
         self.load_plugins()
