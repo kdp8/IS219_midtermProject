@@ -2,3 +2,12 @@ command,param1,param2
 add,5,23
 exit,,
 add,6,23
+exit,,
+exit,,
+greet,,
+add,3,5
+subtract,5,3
+multiply,3,5
+divide,10,5
+exit,,
+menu,,
