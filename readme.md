@@ -18,6 +18,7 @@ This Python Command-Line Calculator is a versatile tool designed for performing 
    - Clone the repository: `git clone https://github.com/kdp8/IS219_midtermProject`.
    - Navigate to the project directory: `cd IS219_midtermProject`.
    - Install dependencies: `pip install -r requirements.txt`.
+   - Set environement variable: `HISTORY_BASE_DIR` to desired history.csv file location.
 
 2. **Running the Application**
    - Launch the calculator: `python main.py`.

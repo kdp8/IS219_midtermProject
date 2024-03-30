@@ -7,6 +7,7 @@ import pkgutil
 import sys
 from dotenv import load_dotenv
 from app.commands import Command, CommandHandler
+from app.env_vars import env
 
 class App:
     def __init__(self):
@@ -56,10 +57,11 @@ class App:
     
     def load_history_file(self, file_name):
         file_name = 'history.csv'
-        if os.path.exists(file_name):
+        full_path = env.get_history_file_path('HISTORY_BASE_DIR', file_name)
+        if os.path.exists(full_path):
             pass
         else:
-            with open(file_name, 'w', newline='') as csv_file:
+            with open(full_path, 'w', newline='') as csv_file:
                 header = ['command', 'param1', 'param2']
                 writer = csv.writer(csv_file)
                 writer.writerow(header)
