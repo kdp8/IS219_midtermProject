@@ -14,6 +14,3 @@ class MenuCommand(Command):
             History.add_history("menu", "", "")
         except FileNotFoundError:
             logging.error("An unexpected error occured.")
-
-# Documentation (video)
-# Add history filename/path as an env var
